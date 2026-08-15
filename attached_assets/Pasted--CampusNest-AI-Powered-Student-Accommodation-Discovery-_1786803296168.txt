@@ -1,0 +1,1237 @@
+# CampusNest
+
+## AI-Powered Student Accommodation Discovery & Blockchain-Backed Verification
+
+**Hackathon:** CodeFusion — Round 2 Offline
+**Team:** 4 members
+**Target:** Students relocating to Noida & Greater Noida
+**Platform:** Web Application
+**MVP Objective:** Working end-to-end prototype
+**Core Deadline:** ~2:00 AM, Night 1
+
+---
+
+# 1. Product Overview
+
+CampusNest is a student accommodation discovery platform designed for students relocating to a new city for college.
+
+Instead of forcing students to manually compare scattered accommodation information, CampusNest combines:
+
+* **AI-powered recommendations**
+* **Accommodation comparison**
+* **Effective-cost calculation**
+* **Commute and locality information**
+* **Property/owner verification information**
+* **Blockchain-backed verification records**
+
+The MVP focuses on one complete journey:
+
+> **Profile → Discover → Compare → Verify → Decide**
+
+The goal is not to build a complete accommodation marketplace during the hackathon.
+
+The goal is to prove that CampusNest can help a student move from:
+
+> **"I need a place to stay."**
+
+to:
+
+> **"These are the properties that fit me, this is why, this is the real cost, and this is what has been verified."**
+
+---
+
+# 2. Problem
+
+Students moving from outside their home state often struggle to find suitable accommodation near their college.
+
+Information is distributed across:
+
+* Brokers
+* Social-media groups
+* Informal referrals
+* Property platforms
+* Maps
+* Reviews
+
+This makes it difficult to answer simple but important questions:
+
+* Which property fits my budget?
+* What will I actually spend every month?
+* How far is it from my college?
+* How long will the commute take?
+* What facilities are available?
+* What do residents say about it?
+* Has the property/owner been verified?
+* Which option is actually the best fit for me?
+
+CampusNest aims to consolidate these decision factors into one experience.
+
+---
+
+# 3. Product Goal
+
+CampusNest should allow a student to:
+
+1. Enter their accommodation requirements.
+2. Discover suitable properties.
+3. Receive ranked recommendations.
+4. Understand why a property matches them.
+5. Compare shortlisted properties.
+6. See the property's effective monthly cost.
+7. See commute and locality information.
+8. See available verification information.
+9. Open the blockchain verification record.
+10. Make a more informed accommodation decision.
+
+---
+
+# 4. Core Product Philosophy
+
+CampusNest has three primary pillars.
+
+## 🤖 AI — "What fits me?"
+
+AI helps interpret the student's requirements and explains why recommended properties match.
+
+## 🔐 Verification — "What has been checked?"
+
+CampusNest displays what information about a property has gone through its verification workflow.
+
+## ⛓️ Blockchain — "Can the verification record be checked?"
+
+A cryptographic record of the verification event is registered on a blockchain testnet so the record becomes tamper-evident and independently checkable.
+
+### Important clarification
+
+Blockchain does **not** independently prove that a property is genuine or safe.
+
+It proves that a particular CampusNest verification record was registered on-chain and has not been silently changed.
+
+---
+
+# 5. Target User
+
+## Primary User
+
+An outstation college student moving to Noida or Greater Noida.
+
+Example:
+
+> A student joining NIET who has never lived in Greater Noida and needs a PG within ₹8,000/month.
+
+---
+
+# 6. MVP User Journey
+
+```text
+Landing Page
+      ↓
+Student Profile
+      ↓
+Find My Stay
+      ↓
+AI-Ranked Recommendations
+      ↓
+Property Details
+      ↓
+Compare Properties
+      ↓
+Verification Information
+      ↓
+Blockchain Verification Record
+      ↓
+Decide / Shortlist
+```
+
+This is the complete MVP.
+
+---
+
+# 7. Feature 1 — Student Onboarding
+
+## Purpose
+
+Collect enough information to personalize accommodation recommendations.
+
+## Inputs
+
+* Name
+* College
+* Budget range
+* Move-in date
+* Preferred locality
+* Accommodation type
+* Lifestyle preferences
+
+## Example
+
+```text
+College:
+NIET
+
+Budget:
+₹6,000 – ₹8,000
+
+Move-in:
+September 2026
+
+Accommodation:
+PG
+
+Priorities:
+✓ Safety
+✓ Good commute
+✓ Food
+```
+
+## Output
+
+A temporary student profile used for recommendation generation.
+
+### Authentication
+
+Not required for MVP.
+
+A mock session is sufficient.
+
+---
+
+# 8. Feature 2 — Property Marketplace
+
+## Purpose
+
+Provide a centralized list of accommodation options.
+
+The MVP will contain approximately:
+
+**12–15 seeded properties**
+
+focused on Noida and Greater Noida.
+
+## Each property contains
+
+* Property ID
+* Name
+* Property type
+* Locality
+* Rent
+* Deposit
+* Food cost
+* Electricity cost
+* Wi-Fi cost
+* Maintenance cost
+* Facilities
+* Distance from college
+* Commute time
+* Commute mode
+* Owner name
+* Verification status
+* Verification hash
+* Blockchain transaction hash
+* Sample resident reviews
+
+The marketplace is **seeded demo data**, not a live accommodation marketplace.
+
+---
+
+# 9. Feature 3 — Property Filtering
+
+Before AI ranking, unsuitable properties should be removed using basic filters.
+
+Possible filters:
+
+* Budget
+* Locality
+* Accommodation type
+* College/location
+
+Example:
+
+```text
+Student budget:
+₹6,000–₹8,000
+
+↓
+
+Remove properties outside acceptable range
+
+↓
+
+Remaining properties
+
+↓
+
+Calculate match scores
+```
+
+The AI model should not be responsible for basic database filtering.
+
+---
+
+# 10. Feature 4 — Match Score
+
+## Purpose
+
+Rank properties according to measurable criteria.
+
+The MVP uses a fixed scoring formula.
+
+| Factor                       | Weight |
+| ---------------------------- | -----: |
+| Budget compatibility         |    30% |
+| Distance / commute           |    25% |
+| Trust / verification signals |    20% |
+| Facilities                   |    15% |
+| Lifestyle preference         |    10% |
+
+The weights may be adjusted after mentor feedback, but the system should use a deterministic scoring method.
+
+## Example
+
+```text
+Sunrise PG
+
+Budget:        29/30
+Commute:       24/25
+Trust:         18/20
+Facilities:    13/15
+Lifestyle:      9/10
+--------------------------------
+Match Score:   93/100
+```
+
+Displayed to the student as:
+
+> **93% Match**
+
+---
+
+# 11. Feature 5 — AI Recommendation Explanation
+
+## Purpose
+
+Explain the recommendation in simple language.
+
+AI should answer:
+
+> **"Why is this property a good match for me?"**
+
+Example:
+
+> **"This property is a strong match because it fits your ₹8,000 budget, is only 1.4 km from NIET, and has strong resident feedback for cleanliness and management."**
+
+### Important
+
+The AI does not independently invent the numerical ranking.
+
+The deterministic scoring system produces the ranking.
+
+AI explains the result.
+
+---
+
+# 12. AI Fallback
+
+The live AI API should not be allowed to break the demo.
+
+For 2–3 predefined demo profiles, known-good recommendation explanations will be prepared beforehand.
+
+Example:
+
+### Profile A
+
+```text
+NIET
+₹8,000
+Safety + commute
+```
+
+Expected:
+
+> Property C — ~94% Match
+
+If the live AI API fails, the application can display the prepared explanation.
+
+The fallback must not be falsely described as a live AI response.
+
+---
+
+# 13. Feature 6 — Recommendation Results
+
+After submitting the profile, the student sees ranked property cards.
+
+## Example
+
+```text
+RECOMMENDED FOR YOU
+
+🥇 Sunrise PG
+94% Match
+₹7,800/month
+1.4 km from NIET
+12 min commute
+
+✓ Verified
+
+"Strong match because..."
+
+[View Property]
+
+
+🥈 Green View PG
+88% Match
+₹7,500/month
+2.3 km from NIET
+19 min commute
+
+[View Property]
+
+
+🥉 Student Heights
+83% Match
+₹6,900/month
+3.0 km from NIET
+24 min commute
+
+[View Property]
+```
+
+---
+
+# 14. Feature 7 — Property Details
+
+The student can open any recommended property.
+
+## Sections
+
+### Property Overview
+
+* Property name
+* Property type
+* Locality
+* Room/accommodation information
+
+### Cost
+
+* Rent
+* Deposit
+* Additional costs
+* Effective monthly cost
+
+### Location
+
+* College distance
+* Commute time
+* Transport mode
+
+### Facilities
+
+* Wi-Fi
+* Food
+* Laundry
+* Security
+* Parking
+* etc.
+
+### Reviews
+
+* Rating
+* Category ratings
+* Sample resident comments
+
+### Trust
+
+* Verification status
+* Verification information
+* Blockchain record
+
+---
+
+# 15. Feature 8 — Effective Monthly Cost
+
+Rent alone does not represent the student's actual monthly expense.
+
+CampusNest calculates:
+
+> **Effective Cost = Rent + Food + Electricity + Wi-Fi + Maintenance**
+
+## Example
+
+```text
+Rent             ₹7,500
+Food               ₹500
+Electricity        ₹150
+Wi-Fi              ₹100
+Maintenance        ₹100
+--------------------------------
+Effective Cost    ₹8,350/month
+```
+
+The effective cost should be prominently displayed.
+
+---
+
+# 16. Feature 9 — Reviews
+
+The MVP uses **seeded sample reviews**.
+
+Each review should be clearly marked as:
+
+> **Sample Resident Review**
+
+Example:
+
+```text
+★★★★★ 4.5
+
+"Rooms are clean and management
+usually responds quickly."
+
+Sample Resident Review
+```
+
+Reviews may contain:
+
+* Cleanliness
+* Food
+* Management
+* Maintenance
+* Wi-Fi
+* Noise
+
+### Important
+
+The MVP will not pretend that seeded reviews are real user-generated reviews.
+
+A production system would require a stronger resident-verification mechanism.
+
+---
+
+# 17. Feature 10 — Property Verification
+
+CampusNest provides a verification status for properties.
+
+Example:
+
+```text
+✓ CAMPUSNEST VERIFIED
+
+Property information checked
+Owner information checked
+Address information checked
+```
+
+The exact verification process used by the prototype should be explained honestly.
+
+The verification badge means:
+
+> **CampusNest has completed its defined verification workflow for this property.**
+
+It does not mean:
+
+> "This property is guaranteed safe."
+
+---
+
+# 18. Feature 11 — Blockchain Verification
+
+For selected verified properties, CampusNest stores a cryptographic representation of the verification record on a blockchain testnet.
+
+## Flow
+
+```text
+CampusNest verification
+        ↓
+Verification record
+        ↓
+Cryptographic hash
+        ↓
+Blockchain transaction
+        ↓
+Transaction hash
+        ↓
+CampusNest property page
+```
+
+## UI
+
+```text
+✓ VERIFIED ON-CHAIN
+
+Property ID:
+CN-104
+
+Verification Hash:
+0x83fa...92bd
+
+Timestamp:
+21 Aug 2026
+
+Transaction:
+0x72ab...c421
+
+[View Blockchain Record]
+```
+
+The transaction link opens the relevant blockchain explorer.
+
+---
+
+# 19. Blockchain Scope
+
+The MVP uses:
+
+### Network
+
+Polygon Amoy testnet
+
+### Smart Contract
+
+`VerificationRegistry.sol`
+
+### Core functionality
+
+```text
+registerVerification(
+    propertyId,
+    recordHash
+)
+```
+
+and:
+
+```text
+getVerification(
+    propertyId
+)
+```
+
+### On-chain information
+
+* Property ID
+* Record hash
+* Timestamp
+
+### Never put on-chain
+
+* Student names
+* Phone numbers
+* Emails
+* Identity documents
+* Owner personal data
+* Sensitive property information
+
+---
+
+# 20. Blockchain Implementation for MVP
+
+To reduce integration risk, blockchain verification will be registered manually before/during the hackathon using Remix.
+
+The resulting real testnet transaction hashes will be attached to the corresponding seeded properties.
+
+The app will display those hashes and link to the blockchain explorer.
+
+### Why?
+
+The MVP's objective is to demonstrate:
+
+> **A real, checkable blockchain-backed verification record**
+
+without making the entire product dependent on a live smart-contract integration during the overnight build.
+
+---
+
+# 21. Feature 12 — Property Comparison
+
+The student can select 2–3 properties and compare them.
+
+## Example
+
+| Factor         | Sunrise PG | Green View |
+| -------------- | ---------: | ---------: |
+| Match          |    **94%** |        88% |
+| Rent           |     ₹7,800 |     ₹7,500 |
+| Effective Cost |     ₹8,350 |     ₹8,100 |
+| Distance       | **1.4 km** |     2.3 km |
+| Commute        | **12 min** |     19 min |
+| Rating         |        4.4 |    **4.6** |
+| Verified       |          ✓ |          ✓ |
+
+The comparison should help the student make the final decision.
+
+---
+
+# 22. MVP Screens
+
+The MVP requires the following screens:
+
+## 1. Landing Page
+
+Communicates:
+
+> Find. Compare. Verify. Decide.
+
+## 2. Student Onboarding
+
+Collects requirements.
+
+## 3. Recommendation Results
+
+Displays:
+
+* Ranked properties
+* Match score
+* AI explanation
+
+## 4. Property Details
+
+Displays:
+
+* Cost
+* Effective cost
+* Commute
+* Facilities
+* Reviews
+* Trust status
+
+## 5. Comparison
+
+Displays 2–3 shortlisted properties.
+
+## 6. Verification
+
+Displays:
+
+* CampusNest verification
+* Hash
+* Timestamp
+* Blockchain transaction
+
+---
+
+# 23. P0 — Must Have
+
+The following define MVP completion.
+
+### Student
+
+* [ ] Profile form works.
+* [ ] Student preferences are captured.
+
+### Marketplace
+
+* [ ] 12–15 properties exist.
+* [ ] Property data is retrievable.
+* [ ] Basic filtering works.
+
+### AI
+
+* [ ] Match score works.
+* [ ] Properties are ranked.
+* [ ] AI explains recommendations.
+* [ ] Fallback explanations exist.
+
+### Property
+
+* [ ] Property detail page works.
+* [ ] Effective monthly cost is calculated.
+* [ ] Commute information is displayed.
+* [ ] Facilities are displayed.
+* [ ] Sample reviews are displayed.
+
+### Trust
+
+* [ ] Verification status is displayed.
+* [ ] Verification explanation is displayed.
+* [ ] Real testnet transaction exists.
+* [ ] Transaction hash is displayed.
+* [ ] Explorer link works.
+
+### Comparison
+
+* [ ] Student can compare 2–3 properties.
+
+### End-to-End
+
+* [ ] A stranger can complete the entire journey without team intervention.
+
+---
+
+# 24. P1 — Only After MVP
+
+These features are optional.
+
+### Flatmate Matching
+
+Simple compatibility matching based on:
+
+* Budget
+* College
+* Locality
+* Lifestyle
+
+### Admin Dashboard
+
+* View properties
+* Approve verification
+* View verification records
+
+### Report Listing
+
+Simple report submission stored in the database.
+
+### Live Map
+
+Google Maps/Mapbox integration.
+
+### AI Review Summary
+
+Summarize seeded reviews.
+
+---
+
+# 25. Explicitly Out of Scope
+
+The following are NOT part of the MVP:
+
+* Real authentication
+* OTP
+* Password management
+* Payments
+* Messaging
+* Chat
+* Full mobile application
+* NFT
+* Token
+* DAO
+* Cryptocurrency payments
+* Production KYC
+* Government identity verification
+* Real-time property availability
+* Full fraud detection
+* Full review-verification system
+* Complete decentralized identity
+* Live backend-to-smart-contract integration
+
+---
+
+# 26. Technical Architecture
+
+```text
+                    STUDENT
+                       │
+                       ▼
+              ┌─────────────────┐
+              │   CAMPUSNEST    │
+              │   WEB APP       │
+              └────────┬────────┘
+                       │
+                       ▼
+              Student Profile
+                       │
+                       ▼
+              Property Filtering
+                       │
+                       ▼
+              Match Score Engine
+                       │
+                       ▼
+              AI Explanation
+                       │
+                       ▼
+              Ranked Properties
+                       │
+          ┌────────────┴────────────┐
+          │                         │
+          ▼                         ▼
+   Property Details           Verification
+          │                         │
+          │                         ▼
+          │                   Blockchain Record
+          │                         │
+          └────────────┬────────────┘
+                       ▼
+                     DECIDE
+```
+
+---
+
+# 27. Technology Stack
+
+| Layer               | Technology                            |
+| ------------------- | ------------------------------------- |
+| Frontend            | Next.js                               |
+| UI                  | Tailwind CSS + shadcn/ui              |
+| Backend             | Generated/managed application backend |
+| Database            | Supabase PostgreSQL                   |
+| AI                  | Gemini / OpenAI                       |
+| Recommendation      | Deterministic weighted scoring        |
+| Blockchain          | Polygon Amoy                          |
+| Smart Contract      | Solidity                              |
+| Contract Deployment | Remix                                 |
+| Hosting             | Lovable/Bolt deployment or Vercel     |
+| Version Control     | GitHub                                |
+
+The team may use AI-assisted development tools such as Lovable or Bolt to generate and modify the application.
+
+---
+
+# 28. Team Responsibilities
+
+## Member A — App Builder
+
+Owns the main application-building session.
+
+Responsible for:
+
+* Screens
+* Navigation
+* Database connection
+* Recommendation UI
+* Property details
+* Verification UI
+
+## Member B — Data
+
+Responsible for:
+
+* 15 property records
+* Sample reviews
+* Cost data
+* Commute data
+* Golden demo profiles
+* Testing recommendation results
+
+## Member C — Blockchain
+
+Responsible for:
+
+* Smart contract
+* Remix deployment
+* Polygon Amoy testnet
+* Verification transactions
+* Transaction hashes
+
+## Member D — Integration & Presentation
+
+Responsible for:
+
+* Testing complete user journey
+* Finding broken flows
+* Demo rehearsal
+* Pitch
+* Judge Q&A
+* Helping integrate fixes
+
+All members participate in testing and presentation.
+
+---
+
+# 29. Demo Dataset
+
+Prepare before the hackathon:
+
+### 15 properties
+
+Create deliberate variety:
+
+* Low cost + long commute
+* High cost + excellent facilities
+* Balanced option
+* Low rent + weaker reviews
+* High comfort + higher cost
+
+This ensures the recommendation system has meaningful trade-offs.
+
+---
+
+# 30. Golden Demo Profiles
+
+## Profile A
+
+**College:** NIET
+**Budget:** ₹8,000
+**Priority:** Safety + commute
+
+Expected:
+
+> Property C — ~94% Match
+
+## Profile B
+
+**College:** NIET
+**Budget:** ₹6,000
+**Priority:** Affordability
+
+Expected:
+
+> Property A
+
+## Profile C
+
+**College:** NIET
+**Budget:** ₹10,000
+**Priority:** Facilities
+
+Expected:
+
+> Property E
+
+These profiles should be tested before the hackathon.
+
+---
+
+# 31. MVP Definition of Done
+
+The MVP is considered complete when a person unfamiliar with CampusNest can perform the following without assistance:
+
+### Step 1
+
+Open CampusNest.
+
+### Step 2
+
+Enter:
+
+> NIET
+> ₹8,000
+> Safety + commute
+
+### Step 3
+
+Click:
+
+> **Find My Stay**
+
+### Step 4
+
+See:
+
+> **94% Match**
+
+with an AI explanation.
+
+### Step 5
+
+Open the property.
+
+### Step 6
+
+See:
+
+* Effective cost
+* Commute
+* Facilities
+* Sample reviews
+* Verification status
+
+### Step 7
+
+Click:
+
+> **View Blockchain Verification**
+
+### Step 8
+
+Open the real testnet transaction.
+
+### Step 9
+
+Return to the property and make a shortlist/decision.
+
+If this works without team intervention:
+
+> **THE MVP IS DONE.**
+
+---
+
+# 32. Hackathon Build Strategy
+
+## 2:00–5:00 PM
+
+Mentor Round 1.
+
+Objective:
+
+* Validate problem
+* Validate MVP
+* Confirm AI role
+* Confirm blockchain role
+* Freeze scope
+
+## 5:00–7:00 PM
+
+Build first application version.
+
+Target:
+
+* Screens
+* Database
+* Property data
+* Contract deployed
+
+## 8:30 PM–1:00 AM
+
+Integration.
+
+Target:
+
+> Full user journey works.
+
+## 1:00–2:00 AM
+
+### CODE FREEZE
+
+No new features.
+
+Only:
+
+* Bug fixing
+* Integration
+* Demo rehearsal
+* Fallback testing
+
+## 2:00–5:30 AM
+
+Mentor Round 2.
+
+Fix problems identified by mentors.
+
+## ~7:00 AM
+
+Elimination.
+
+Goal:
+
+> **Reliable P0 demo, not maximum feature count.**
+
+## Day 2
+
+Only after surviving:
+
+* UI polish
+* AI improvement
+* Verification presentation
+* P1 features
+* Final pitch
+* Q&A preparation
+
+---
+
+# 33. Final Demo
+
+The complete demo should take approximately 2–3 minutes.
+
+### 1. Problem
+
+> "A student moving to a new city doesn't just need accommodation. They need to know what fits their budget and commute, and what information they can actually trust."
+
+### 2. Profile
+
+Enter:
+
+> NIET
+> ₹8,000
+> Safety + commute
+
+### 3. AI
+
+Show:
+
+> **94% Match**
+
+Click:
+
+> **Why this match?**
+
+### 4. Property
+
+Show:
+
+* ₹8,350 effective cost
+* 1.4 km from NIET
+* 12-minute commute
+* Facilities
+* Sample resident feedback
+
+### 5. Verification
+
+Show:
+
+> **CampusNest Verified**
+
+Explain what was checked.
+
+### 6. Blockchain
+
+Click:
+
+> **View Verification Record**
+
+Show the real testnet transaction.
+
+### 7. Closing
+
+> **"AI helps the student decide. CampusNest's verification workflow establishes what has been checked, and blockchain makes that verification record tamper-evident."**
+
+---
+
+# 34. Honest Judge Positioning
+
+## If asked: "Does blockchain prove the property is genuine?"
+
+Answer:
+
+> "No. Blockchain does not independently verify a physical property. CampusNest performs a verification workflow first, and blockchain records a tamper-evident proof of that verification event."
+
+## If asked: "Why AI?"
+
+Answer:
+
+> "The problem isn't just finding properties. It's deciding which one fits a particular student. Our scoring system ranks the properties, while AI explains that recommendation in natural language."
+
+## If asked: "Are the reviews real?"
+
+Answer:
+
+> "The prototype uses seeded sample reviews, which are explicitly labeled as demo data. We don't claim they are real user-generated reviews."
+
+## If asked: "Is this production-ready?"
+
+Answer:
+
+> "No. It's a functional hackathon MVP. We've intentionally focused on proving the core discovery, recommendation and verification experience before adding production features such as authentication, payments and full KYC."
+
+---
+
+# 35. Final Product Boundary
+
+CampusNest MVP ends at:
+
+> ### **A student receives a personalized shortlist, understands the real cost and commute, sees what CampusNest has verified, and can independently inspect the corresponding blockchain verification record.**
+
+Anything beyond that is roadmap.
+
+---
+
+# 36. One-Line Pitch
+
+> **CampusNest helps students find the right place to live with AI-powered recommendations and makes CampusNest's verification history independently checkable through tamper-evident blockchain records.**
+
+# 37. Product Mantra
+
+### 🤖 AI
+
+**Find what fits me.**
+
+### 🔐 Verification
+
+**Know what CampusNest checked.**
+
+### ⛓️ Blockchain
+
+**Check that record.**
+
+### 🏠 CampusNest
+
+**Find. Compare. Verify. Decide.**
