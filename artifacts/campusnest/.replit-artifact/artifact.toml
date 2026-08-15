@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "CampusNest"
+description = "A polished hackathon MVP that helps students relocating to Noida and Greater Noida find, compare, and verify accommodation through deterministic recommendations and transparent verification records."
+version = "1.0.0"
+id = "artifacts/campusnest"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22156
+
+[services.development]
+run = "pnpm --filter @workspace/campusnest run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/campusnest", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/campusnest/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22156"
+BASE_PATH = "/"

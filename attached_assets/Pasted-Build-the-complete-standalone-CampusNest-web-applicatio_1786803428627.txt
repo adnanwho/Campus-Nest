@@ -1,0 +1,270 @@
+Build the complete standalone CampusNest web application based strictly on the uploaded CampusNest PRD.
+
+IMPORTANT:
+This is a hackathon MVP, not a production application.
+Do not add features outside the defined MVP.
+Prioritize a working end-to-end user journey over feature count.
+
+CORE USER JOURNEY:
+
+Student Profile
+→ Property Filtering
+→ Match Score
+→ AI Recommendation Explanation
+→ Recommended Properties
+→ Property Details
+→ Compare 2–3 Properties
+→ Verification Information
+→ Blockchain Verification Record
+→ Decide / Shortlist
+
+MVP FEATURES:
+
+1. STUDENT ONBOARDING
+Create a simple profile form with:
+- Name
+- College
+- Budget range
+- Move-in date
+- Preferred locality
+- Accommodation type
+- Lifestyle/preferences
+
+No real authentication is required.
+
+2. PROPERTY MARKETPLACE
+Create 12–15 realistic SEEDED demo properties focused on Noida and Greater Noida.
+
+Each property should have:
+- Name
+- Property type
+- Locality
+- Rent
+- Deposit
+- Food cost
+- Electricity cost
+- Wi-Fi cost
+- Maintenance cost
+- Facilities
+- Distance from college
+- Commute time
+- Commute mode
+- Owner name
+- Verification status
+- Verification hash
+- Blockchain transaction hash
+- Sample resident reviews
+
+Clearly label reviews as SAMPLE / DEMO DATA.
+
+3. MATCHING ENGINE
+Do NOT let an LLM randomly determine the numerical match score.
+
+Use deterministic scoring:
+
+Budget compatibility: 30%
+Distance / commute: 25%
+Trust / verification signals: 20%
+Facilities: 15%
+Lifestyle preference: 10%
+
+Display scores such as:
+94% Match
+88% Match
+83% Match
+
+4. AI EXPLANATION
+Add an AI-powered explanation for why a property matches the student.
+
+Example:
+"This property is a strong match because it fits your ₹8,000 budget, is only 1.4 km from NIET, and has strong resident feedback for cleanliness and management."
+
+Keep the AI feature focused on:
+- Understanding preferences
+- Explaining recommendations
+- Optional review summarization
+
+Do NOT build a generic AI chatbot.
+
+5. RECOMMENDATION PAGE
+
+Display ranked property cards containing:
+- Match percentage
+- Property name
+- Rent
+- Effective monthly cost
+- Distance
+- Commute time
+- Rating
+- Verification status
+- Short AI explanation
+
+6. PROPERTY DETAIL PAGE
+
+Include:
+- Property overview
+- Rent
+- Deposit
+- Effective monthly cost
+- Facilities
+- Distance
+- Commute
+- Transport mode
+- Sample reviews
+- Verification information
+
+Calculate:
+
+Effective Cost =
+Rent + Food + Electricity + Wi-Fi + Maintenance
+
+7. COMPARISON
+
+Allow the student to select 2–3 properties.
+
+Compare:
+- Match score
+- Rent
+- Effective cost
+- Distance
+- Commute
+- Rating
+- Verification status
+- Important facilities
+
+8. VERIFICATION
+
+Display a clear CampusNest verification section.
+
+Example:
+
+✓ CAMPUSNEST VERIFIED
+
+Property information checked
+Owner information checked
+Address information checked
+
+IMPORTANT:
+Do not claim that blockchain independently proves a property is genuine or safe.
+
+9. BLOCKCHAIN VERIFICATION UI
+
+For the MVP, use seeded REAL TESTNET transaction data.
+
+Display:
+- Property ID
+- Verification hash
+- Timestamp
+- Transaction hash
+- "View on Blockchain Explorer"
+
+The blockchain concept is:
+CampusNest verification
+→ verification record
+→ cryptographic hash
+→ blockchain transaction
+→ transaction hash
+
+Do not store sensitive personal information on-chain.
+
+Do not build:
+- NFT
+- Token
+- DAO
+- Crypto payments
+- Wallet marketplace
+- Decentralized identity system
+
+10. GOLDEN DEMO PROFILE
+
+Create a convenient demo profile:
+
+College: NIET
+Budget: ₹6,000–₹8,000
+Move-in: September 2026
+Accommodation: PG
+Priorities: Safety, Good Commute, Food
+
+Make sure this produces a strong recommendation, ideally around 90%+.
+
+11. DESIGN
+
+The product should look like a polished modern startup/hackathon product.
+
+Use:
+- Clean modern UI
+- Strong visual hierarchy
+- Responsive layout
+- Cards for properties
+- Match-score visual
+- Clear verification badges
+- Excellent empty/loading/error states
+- Subtle animations only where useful
+
+Avoid excessive gradients, unnecessary animations, or generic AI-dashboard styling.
+
+Brand:
+CampusNest
+
+Tagline:
+"Find. Compare. Verify. Decide."
+
+12. SECURITY
+
+Do not expose:
+- AI API keys
+- Database service keys
+- Blockchain private keys
+
+Use environment variables for secrets.
+
+Validate user input.
+
+Do not allow the frontend to directly modify:
+- is_verified
+- verification_hash
+- verification_tx
+
+Do not expose sensitive database fields to the frontend.
+
+13. MVP BOUNDARY
+
+DO NOT BUILD:
+- Real authentication
+- OTP
+- Payments
+- Chat
+- Messaging
+- Full mobile application
+- NFT
+- Token
+- DAO
+- Cryptocurrency payments
+- Production KYC
+- Real-time property availability
+- Full fraud detection
+- Full review verification pipeline
+- Complex admin system
+- Flatmate matching unless the entire P0 flow is already working
+
+14. MOST IMPORTANT REQUIREMENT
+
+The application must be usable from beginning to end by a person who has never seen CampusNest before.
+
+A user must be able to:
+
+1. Enter profile
+2. Click Find My Stay
+3. See ranked recommendations
+4. Understand why the top result matches
+5. Open the property
+6. See effective cost and commute
+7. Compare properties
+8. See verification information
+9. Open the blockchain verification record
+
+That complete flow is the definition of MVP completion.
+
+Before implementing, structure the application so the frontend, data, AI layer, and verification layer can be connected cleanly later.
+
+Do not invent additional product requirements.
